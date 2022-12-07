@@ -59,6 +59,15 @@ public class BloomFilter<E> implements Cloneable, Serializable {
         this.bitsPerElement = c;
         this.bitSetSize = (int) Math.ceil(c * n);
         numberOfAddedElements = 0;
+        initResult();
+    }
+
+    private void initResult() {
+        System.out.println("*****布隆过滤器初始化成功*****");
+        System.out.println("预期样本数量：" + this.expectedNumberOfFilterElements);
+        System.out.println("bitSet大小：" + ((float)this.bitSetSize)/8/1024/1024+"MB");
+        System.out.println("哈希函数数目：" + this.k);
+        System.out.println("*****布隆过滤器初始化成功*****");
     }
 
     /**
@@ -218,6 +227,11 @@ public class BloomFilter<E> implements Cloneable, Serializable {
      */
     public void add(E element) {
         add(element.toString().getBytes(MessageDigestUtils.CHARSET));
+    }
+
+    public void printBit(){
+        for(int i=0;i<bitSetSize;i++){
+        System.out.println(i+":"+ bitSet.get(i));}
     }
 
     /**
